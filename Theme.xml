@@ -1,66 +1,254 @@
 <?xml version="1.0" encoding="UTF-8" ?>
+
+
+<!--hari om namah shivay-->
+<!-- Harish Chandra (bd) + 88 01811552099 -->
 <!DOCTYPE html>
 <html b:css='false' b:defaultwidgetversion='2' b:layoutsversion='3' b:responsive='true' xmlns='http://www.w3.org/1999/xhtml' xmlns:b='http://www.google.com/2005/gml/b' xmlns:data='http://www.google.com/2005/gml/data' xmlns:expr='http://www.google.com/2005/gml/expr'>
   <head>
+    <script type='text/javascript'>
+//<![CDATA[
+// BloggerJS v0.3.1
+// Copyright (c) 2017-2018 Kenny Cruz
+// Licensed under the MIT License
+var urlTotal,nextPageToken,postsDatePrefix=!1,accessOnly=!1,useApiV3=!1,apiKey="",blogId="",postsOrPages=["pages","posts"],jsonIndex=1,secondRequest=!0,feedPriority=0,amp="&"[0];function urlVal(){var e=window.location.pathname,t=e.length;return".html"===e.substring(t-5)?0:t>1?1:2}function urlMod(){var e=window.location.pathname;"p"===e.substring(1,2)?(e=(e=e.substring(e.indexOf("/",1)+1)).substr(0,e.indexOf(".html")),history.replaceState(null,null,"../"+e)):(e=(e=postsDatePrefix?e.substring(1):e.substring(e.indexOf("/",7)+1)).substr(0,e.indexOf(".html")),history.replaceState(null,null,"../../"+e))}function urlSearch(e,t){var n=e+".html";t.forEach(function(e){-1!==e.search(n)&&(window.location=e)})}function urlManager(){var e=urlVal();0===e?accessOnly||urlMod():1===e?getJSON(postsOrPages[feedPriority],1):2===e&&(accessOnly||history.replaceState(null,null,"/"))}function getJSON(e,t){var n=document.createElement("script");if(useApiV3){var o="https://www.googleapis.com/blogger/v3/blogs/"+blogId+"/"+e+"?key="+apiKey+"#maxResults=500#fields=nextPageToken%2Citems(url)#callback=bloggerJSON";nextPageToken&&(o+="#pageToken="+nextPageToken),nextPageToken=void 0}else o=window.location.protocol+"//"+window.location.hostname+"/feeds/"+e+"/default?start-index="+t+"#max-results=150#orderby=published#alt=json-in-script#callback=bloggerJSON";o=o.replace(/#/g,amp),n.type="text/javascript",n.src=o,document.getElementsByTagName("head")[0].appendChild(n)}function bloggerJSON(e){var t=[];if(useApiV3||void 0===urlTotal&&(urlTotal=parseInt(e.feed.openSearch$totalResults.$t)),useApiV3){try{e.items.forEach(function(e,n){t.push(e.url)})}catch(e){}nextPageToken=e.nextPageToken}else try{e.feed.entry.forEach(function(n,o){var r=e.feed.entry[o];r.link.forEach(function(e,n){"alternate"===r.link[n].rel&&t.push(r.link[n].href)})})}catch(e){}urlSearch(window.location.pathname,t),urlTotal>150?(jsonIndex+=150,urlTotal-=150,getJSON(postsOrPages[feedPriority],jsonIndex)):nextPageToken?getJSON(postsOrPages[feedPriority]):secondRequest&&(nextPageToken=void 0,urlTotal=void 0,jsonIndex=1,secondRequest=!1,0===feedPriority?(feedPriority=1,getJSON("posts",1)):1===feedPriority&&(feedPriority=0,getJSON("pages",1)))}function bloggerJS(e){e&&(feedPriority=e),urlManager()}bloggerJS();
+//]]>
+</script>
     <meta content='width=device-width, initial-scale=1' name='viewport'/>
     <b:include data='blog' name='all-head-content'/>
     <title><data:blog.pageTitle/></title>
     <link href='https://fonts.googleapis.com/css2?family=Pacifico&amp;display=swap' rel='stylesheet'/>
     <link href='https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&amp;display=swap' rel='stylesheet'/>
 
-    <b:skin><![CDATA[
-      body { margin: 0; padding: 0; background: #ffffff; font-family: 'Roboto', sans-serif; color: #202124; -webkit-font-smoothing: antialiased; }
-      .container { max-width: 800px; margin: 0 auto; padding: 0 20px; }
+   <b:skin><![CDATA[
+      /* Global Styles */
+      body { 
+        margin: 0; 
+        padding: 0; 
+        background: #ffffff; 
+        font-family: 'Roboto', sans-serif; 
+        color: #202124; 
+        -webkit-font-smoothing: antialiased; 
+      }
       
-      a { text-decoration: none !important; color: inherit; transition: color 0.2s ease; }
-      a:hover { color: #1a73e8 !important; }
+      .container { 
+        max-width: 800px; 
+        margin: 0 auto; 
+        padding: 0 20px; 
+      }
+      
+      a { 
+        text-decoration: none !important; 
+        color: inherit; 
+        transition: color 0.2s ease; 
+      }
+      
+      a:hover { 
+        color: #1a73e8 !important; 
+      }
 
-      /* Pure Text Header Styling */
-      header/* Signature Header Style */
-header { 
-  padding: 60px 0 20px 0; 
-  text-align: center; 
-  background: #ffffff; 
-}
+      /* --- HEADER STYLING --- */
+      header { 
+        padding: 40px 0 0 0; 
+        background: #ffffff;
+        display: flex;             
+        align-items: baseline;     
+        gap: 1px;                 
+        flex-wrap: nowrap;
+        /* This adds the horizontal line after the description */
+        border-bottom: 1px solid #f1f3f4; 
+      }
 
-.header-text h1 { 
-  font-family: 'Pacifico', cursive; /* The handwritten font */
-  font-size: 64px;                 /* Large signature size */
-  font-weight: 400; 
-  margin: 0; 
-  color: #000000;                  /* Solid black like the image */
-  letter-spacing: 0; 
-  text-transform: none;            /* Keep it natural */
-}
+      .header-text h1 { 
+        font-family: 'Pacifico', cursive; 
+        font-size: 42px; 
+        font-weight: 200; 
+        margin: 0; 
+        color: #000000; 
+        white-space: nowrap;
+      }
 
-.header-text h1 a { 
-  color: #000000; 
-  text-decoration: none; 
-}
-      .divider, .footer-divider { border-top: 1px solid #f1f3f4; margin: 10px 0 40px 0; }
+      .header-description {
+        /* Changed font-family to match your name */
+        font-family: 'Pacifico', cursive; 
+        font-size: 18px;
+        color: #5f6368;
+        margin: 0;
+        white-space: nowrap;       
+        overflow: hidden;
+        text-overflow: ellipsis;   
+      }
 
-      .post { margin-bottom: 40px; }
+      .header-text h1 a { 
+        color: #000000; 
+        text-decoration: none; 
+      }
+
+      /* --- POSTS & CONTENT --- */
+      .post { margin-top: 30px; margin-bottom: 40px; }
       .post-title h2 { font-size: 28px; font-weight: 400; margin: 0; }
-      .post-date { font-size: 14px; color: #70757a; margin: 5px 0 20px 0; display: block; }
+      .post-date { 
+        font-size: 14px; 
+        color: #70757a; 
+        margin: 5px 0 20px 0; 
+        display: block; 
+      }
       .post-body { font-size: 18px; line-height: 1.7; color: #3c4043; }
       .post-body img { max-width: 100%; height: auto; border-radius: 4px; }
 
-      
-
-      .blog-pager { margin: 50px 0; display: flex; justify-content: center; gap: 20px; }
-      .blog-pager a { border: 1px solid #e8eaed; padding: 8px 25px; border-radius: 20px; font-size: 14px; color: #1a73e8; font-weight: 500; }
+      .blog-pager { 
+        margin: 50px 0; 
+        display: flex; 
+        justify-content: center; 
+        gap: 20px; 
+      }
+      .blog-pager a { 
+        border: 1px solid #e8eaed; 
+        padding: 8px 25px; 
+        border-radius: 20px; 
+        font-size: 14px; 
+        color: #1a73e8; 
+        font-weight: 500; 
+      }
       .blog-pager a:hover { background: #f8f9fa; }
 
-      .comments-area { margin-top: 50px; padding-top: 30px; border-top: 1px solid #f1f3f4; }
-      .comment-list { list-style: none; padding: 0; margin-bottom: 30px; }
-      .comment-item { padding: 15px 0; border-bottom: 1px solid #f8f9fa; }
+      footer { 
+        margin-top: 60px; 
+        padding: 40px 0; 
+        text-align: center; 
+        color: #70757a; 
+        font-size: 13px; 
+      }
 
-      footer { margin-top: 60px; padding: 40px 0; text-align: center; color: #70757a; font-size: 13px; }
-      .footer-menu { list-style: none; padding: 0; margin: 0 0 15px 0; display: flex; justify-content: center; gap: 25px; }
 
-      @media screen and (min-width: 768px) {
-        .header-text h1 { font-size: 48px; }
-        .header-description { font-size: 18px; }
+
+-----------------------------------------------------------
+
+
+
+
+
+/* --- MINIMAL HEADER: NAME + DESCRIPTION ONLY --- */
+header {
+  display: flex;
+  justify-content: flex-start; /* Keeps everything on the left */
+  align-items: baseline; 
+  padding: 30px 20px 10px 20px;
+  border-bottom: 1px solid #f1f3f4;
+}
+
+.header-left {
+  display: flex;
+  align-items: baseline; /* Perfectly aligns the bottom of the texts */
+  gap: 15px; /* Space between Name and Description */
+  flex-wrap: wrap; /* Allows description to move below on very tiny phones */
+}
+
+.header-title {
+  font-family: 'Pacifico', cursive;
+  font-size: 38px;
+  margin: 0;
+}
+
+.header-title a {
+  color: #000000;
+  text-decoration: none;
+}
+
+.header-description {
+  font-family: 'Pacifico', cursive;
+  font-size: 16px;
+  color: #5f6368;
+  margin: 0;
+}
+
+.site-footer {
+  /* The horizontal line */
+  border-top: 1px solid #f1f3f4;
+
+/* --- MOBILE VIEW --- */
+@media screen and (max-width: 480px) {
+  .header-title {
+    font-size: 36px; /* Slightly smaller name for phones */
+  }
+  .header-description {
+    font-size: 14px; /* Slightly smaller description for phones */
+  }
+  .header-left {
+    gap: 8px; /* Tighter gap on phones */
+  }
+}
+-------------------------------------------------
+
+
+/* --- Desktop & General Styles --- */
+.site-footer {
+  width: 100%;
+  margin-top: 50px;
+  border-top: 1px solid #f1f3f4;
+  padding: 40px 20px;
+  font-family: "Roboto", sans-serif;
+  background-color: #fff;
+}
+
+.footer-inner {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.footer-brand {
+  font-size: 22px;
+  color: #5f6368;
+  font-weight: 500;
+}
+
+.footer-links {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  gap: 20px;
+}
+
+.footer-links a {
+  color: #70757a;
+  text-decoration: none;
+  font-size: 14px;
+  white-space: nowrap; /* Prevents links from breaking into two lines */
+  transition: color 0.2s ease;
+}
+
+.footer-links a:hover {
+  color: #000;
+}
+
+/* --- Mobile Fix (Screens smaller than 600px) --- */
+@media screen and (max-width: 600px) {
+  .footer-inner {
+    flex-direction: column; /* Stacks Brand above Links */
+    gap: 20px;
+    text-align: center;
+  }
+
+  .footer-links {
+    flex-wrap: wrap;       /* Allows links to wrap if screen is very narrow */
+    justify-content: center;
+    gap: 15px;
+  }
+}
+------------------------------------------------------
+
+      /* --- MOBILE RESPONSIVENESS --- */
+      @media screen and (max-width: 768px) {
+        header {
+          padding: 20px 0 10px 0;
+          gap: 10px;
+        }
+        .header-text h1 { font-size: 36px; }
+        .header-description { font-size: 14px; }
       }
     ]]></b:skin>
   <b:if cond='data:view.isPage'>
@@ -73,57 +261,20 @@ header {
   </head>
 
   <body>
-    <header class='container'>
-      <div class='header-text'>
-        <b:section id='header-title' maxwidgets='1' showaddelement='no'>
-          <b:widget id='Header1' locked='true' title='Harish (Header)' type='Header' version='2' visible='true'>
-            <b:widget-settings>
-              <b:widget-setting name='displayUrl'/>
-              <b:widget-setting name='displayHeight'>0</b:widget-setting>
-              <b:widget-setting name='sectionWidth'>-1</b:widget-setting>
-              <b:widget-setting name='useImage'>false</b:widget-setting>
-              <b:widget-setting name='shrinkToFit'>false</b:widget-setting>
-              <b:widget-setting name='imagePlacement'>BEHIND</b:widget-setting>
-              <b:widget-setting name='displayWidth'>0</b:widget-setting>
-            </b:widget-settings>
-            <b:includable id='main'>
-              <h1><a expr:href='data:blog.homepageUrl'><data:title/></a></h1>
-              <p class='header-description'><data:description/></p>
-            </b:includable>
-            <b:includable id='behindImageStyle'>
-              <b:if cond='data:sourceUrl'>
-                <b:include cond='data:this.image' data='{ image: data:this.image, selector: &quot;.header-widget&quot; }' name='responsiveImageStyle'/>
-                <style type='text/css'>
-                  .header-widget {
-                    background-position: <data:blog.locale.languageAlignment/>;
-                    background-repeat: no-repeat;
-                    background-size: cover;
-                  }
-                </style>
-              </b:if>
-            </b:includable>
-            <b:includable id='description'>
-              <p><data:this.description/></p>
-            </b:includable>
-            <b:includable id='image'>
-              <a class='header-image-wrapper' expr:href='data:blog.homepageUrl'>
-                <b:include data='{ image: data:image, altText: data:blog.title.escaped, originalWidth: data:width, originalHeight: data:height }' name='responsiveImage'/>
-              </a>
-            </b:includable>
-            <b:includable id='title'>
-              <h1>
-                <b:tag cond='data:view.url != data:blog.homepageUrl' expr:href='data:blog.homepageUrl' name='a'>
-                  <data:title/>
-                </b:tag>
-              </h1>
-            </b:includable>
-          </b:widget>
-        </b:section>
-      </div>
-    </header>
+   <header class='container'>
+  
+  <div class='header-left'>
+    <h1 class='header-title'>
+      <a expr:href='data:blog.homepageUrl'><data:blog.title/></a>
+    </h1>
+    <p class='header-description'>La vita è bella &#10084;&#65039;</p>
+  </div>
 
+  
+
+</header>
     <div class='container'><div class='divider'/></div>
-
+<br/>
     <main class='container'>
       <b:section id='main' name='Main Content' showaddelement='yes'>
         <b:widget id='FeaturedPost1' locked='false' title='📌Pin post' type='FeaturedPost' version='2' visible='false'>
@@ -655,7 +806,7 @@ header {
           <b:includable id='nextPageLink'><a class='blog-pager-older-link' expr:href='data:olderPageUrl' expr:title='data:messages.olderPosts'><data:messages.olderPosts/></a></b:includable>
           <b:includable id='nextprev'>
             <style>
-              .blog-pager { background: none !important; border: none !important; box-shadow: none !important; display: flex; justify-content: center; gap: 35px; align-items: center; padding: 40px 0; }
+              .blog-pager { background: none !important; border: none !important; box-shadow: none !important; display: flex; justify-content: center; gap: 35px; align-items: center; padding: 0; }
               .blog-pager a { background: none !important; border: none !important; padding: 0 !important; display: inline-flex; }
             </style>
             <div class='blog-pager' id='blog-pager'>
@@ -851,28 +1002,29 @@ header {
       </b:section>
     </main>
 
-  <footer class='container' style='display: flex; justify-content: space-between; align-items: center; padding: 30px 0; border-top: 1px solid #e8eaed; margin-top: 40px; font-family: &quot;Roboto&quot;, Arial, sans-serif;'>
-  
-  <div style='font-size: 24px; color: #70757a; font-weight: 400; letter-spacing: -0.2px;'>
-    <a expr:href='data:blog.homepageUrl' onmouseout='this.style.color=&quot;#70757a&quot;' onmouseover='this.style.color=&quot;#4285f4&quot;' style='color: inherit; text-decoration: none; transition: color 0.2s ease;'>
-      <data:blog.title/>
-    </a>
+ <footer class='site-footer'>
+  <div class='footer-inner'>
+    
+    <div class='footer-brand'>
+      <a expr:href='data:blog.homepageUrl' style='color:inherit; text-decoration:none;'>
+        <data:blog.title/>
+      </a>
+    </div>
+
+    <ul class='footer-links'>
+      <li><a href='https://github.com/HarishSarker/Kiran-minimalist-blogger-theme'>Download Template</a></li>
+      <li><a href='https://www.harish.com.bd/p/about-me.html'>About</a></li>
+      <li><a href='https://www.harish.com.bd/p/contact-form.html'>Contact</a></li>
+    </ul>
+
   </div>
-
-  <ul class='footer-menu' style='list-style: none; padding: 0; margin: 0; display: flex; align-items: center; gap: 15px; font-size: 14px; color: #70757a;'>
-    <li>
-      <a expr:href='data:blog.homepageUrl' style='color: inherit; text-decoration: none;'>Home</a>
-    </li>
-    <li style='color: #bdc1c6; font-size: 10px;'>&#8226;</li>
-    <li>
-      <a href='https://www.harish.com.bd/p/about-me.html' style='color: inherit; text-decoration: none;'>About</a>
-    </li>
-    <li style='color: #bdc1c6; font-size: 10px;'>&#8226;</li>
-    <li>
-      <a href='https://www.harish.com.bd/p/contact-form.html' style='color: inherit; text-decoration: none;'>Contact</a>
-    </li>
-  </ul>
-
 </footer>
+    <script type='text/javascript'>
+  var uri = window.location.toString();
+  if (uri.indexOf(&quot;?m=1&quot;,&quot;?m=1&quot;) &gt; 0) {
+    var clean_uri = uri.substring(0, uri.indexOf(&quot;?m=1&quot;));
+    window.history.replaceState({}, document.title, clean_uri);
+  }
+</script>
   </body>
 </html>
