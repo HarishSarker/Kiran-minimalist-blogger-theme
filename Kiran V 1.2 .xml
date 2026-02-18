@@ -123,10 +123,44 @@ var urlTotal,nextPageToken,postsDatePrefix=!1,accessOnly=!1,useApiV3=!1,apiKey="
       }
 
 
-
+/* Hide the footer line on Pages if no tags are present */
+.page .post-meta-footer:empty {
+  display: none;
+}
 -----------------------------------------------------------
 
+.post-meta-footer {
+  margin-top: 30px;
+  padding-top: 15px;
+  border-top: 1px solid #f8f9fa; /* Very subtle line */
+  font-family: 'Roboto', sans-serif;
+  font-size: 12px;
+  color: #9aa0a6; /* Soft grey */
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
 
+.word-count {
+  letter-spacing: 0.5px;
+}
+
+.meta-sep {
+  color: #dadce0;
+}
+
+.footer-tags a {
+  color: #9aa0a6;
+  text-decoration: none;
+  margin-right: 5px;
+  transition: color 0.2s;
+}
+
+.footer-tags a:hover {
+  color: #202124; /* Darkens on hover */
+}
+
+----------------------------------------------------
 
 
 
@@ -279,6 +313,86 @@ header {
 <br/>
     <main class='container'>
       <b:section id='main' name='Main Content' showaddelement='yes'>
+        <b:widget id='HTML4' locked='false' title='' type='HTML' visible='true'>
+          <b:widget-settings>
+            <b:widget-setting name='content'><![CDATA[<div id='perfect-home-slider' style='display:none;'>
+  <div class='pure-fade-slider'>
+    <div class='fade-item active'><img src='https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?auto=format&fit=crop&w=1200&q=80'/></div>
+    <div class='fade-item'><img src='https://images.unsplash.com/photo-1501785888041-af3ef285b470?auto=format&fit=crop&w=1200&q=80'/></div>
+    <div class='fade-item'><img src='https://images.unsplash.com/photo-1472214103451-9374bd1c798e?auto=format&fit=crop&w=1200&q=80'/></div>
+    <div class='fade-item'><img src='https://images.unsplash.com/photo-1447752875215-b2761acb3c5d?auto=format&fit=crop&w=1200&q=80'/></div>
+    <div class='fade-item'><img src='https://images.unsplash.com/photo-1433086966358-54859d0ed716?auto=format&fit=crop&w=1200&q=80'/></div>
+    <div class='fade-counter'><span id='fade-num'>1</span> / 5</div>
+  </div>
+</div>
+
+<style>
+  .pure-fade-slider {
+    position: relative;
+    width: 100%;
+    max-width: 800px;
+    aspect-ratio: 16 / 9;
+    margin: auto;
+    background: #000;
+    border-radius: 12px;
+    overflow: hidden;
+  }
+  .fade-item {
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    opacity: 0;
+    transition: opacity 1.2s ease-in-out;
+  }
+  .fade-item.active { opacity: 1; }
+  .fade-item img { width: 100%; height: 100%; object-fit: cover; }
+  .fade-counter {
+    position: absolute;
+    bottom: 15px; right: 15px;
+    color: white;
+    font-family: sans-serif;
+    font-size: 12px;
+    background: rgba(0,0,0,0.3);
+    padding: 4px 10px;
+    border-radius: 4px;
+    z-index: 10;
+  }
+</style>
+
+<script>
+  (function() {
+    // 1. CHECK IF HOMEPAGE
+    // This checks if the URL is just your domain (e.g., example.blogspot.com/)
+    var isHome = window.location.pathname === '/' || window.location.pathname === '/index.html';
+    
+    if (isHome) {
+      // 2. SHOW THE SLIDER
+      var sliderWrap = document.getElementById('perfect-home-slider');
+      sliderWrap.style.display = 'block';
+
+      // 3. START ANIMATION
+      let current = 0;
+      const items = document.querySelectorAll('.fade-item');
+      const numDisplay = document.getElementById('fade-num');
+
+      function nextFade() {
+        items[current].classList.remove('active');
+        current = (current + 1) % items.length;
+        items[current].classList.add('active');
+        numDisplay.textContent = current + 1;
+      }
+      setInterval(nextFade, 4000);
+    }
+  })();
+</script>]]></b:widget-setting>
+          </b:widget-settings>
+          <b:includable id='main'>
+  <b:include name='widget-title'/>
+  <div class='widget-content'>
+    <data:content/>
+  </div>
+</b:includable>
+        </b:widget>
         <b:widget id='FeaturedPost1' locked='false' title='📌Pin post' type='FeaturedPost' version='2' visible='false'>
           <b:widget-settings>
             <b:widget-setting name='showSnippet'>true</b:widget-setting>
@@ -561,6 +675,7 @@ header {
             <b:widget-setting name='style.layout'>1x1</b:widget-setting>
             <b:widget-setting name='showLabels'>true</b:widget-setting>
             <b:widget-setting name='showLocation'>true</b:widget-setting>
+            <b:widget-setting name='postLabelsLabel'/>
             <b:widget-setting name='showTimestamp'>true</b:widget-setting>
             <b:widget-setting name='postsPerAd'>1</b:widget-setting>
             <b:widget-setting name='showBacklinks'>false</b:widget-setting>
@@ -575,9 +690,32 @@ header {
                   <b:if cond='data:view.isPost'><data:post.title/><b:else/><a expr:href='data:post.url'><data:post.title/></a></b:if>
                 </h2>
                 <div class='post-date'>
-                  <b:if cond='data:post.date'><data:post.date/><b:else/><data:post.timestamp/></b:if>
+                 🎯 <b:if cond='data:post.date'><data:post.date/><b:else/><data:post.timestamp/></b:if>
                 </div>
                 <div class='post-body'><data:post.body/></div>
+                <br/>
+               <div class='post-meta-footer'>
+  
+
+  <b:if cond='data:post.labels'>
+    <b:if cond='!data:view.isPage'><span class='meta-sep'/></b:if>
+    <span class='footer-tags'>
+      <b:loop values='data:post.labels' var='label'>
+       🔖 <a expr:href='data:label.url' rel='tag'><data:label.name/></a>
+      </b:loop>
+    </span>
+  </b:if>
+  <b:if cond='!data:view.isPage'>
+    <span class='word-count'>
+     🌀 <script type='text/javascript'>
+        var str = &quot;<data:post.body.escaped/>&quot;;
+        var words = str.split(&#39; &#39;).length;
+        document.write(words + &quot; words&quot;);
+      </script>
+    </span>
+  </b:if>
+</div>
+                <br/>
                 <b:if cond='data:view.isPost'>
                   <div class='comments-area' id='comments'>
                     <h3 style='font-weight: 500;'>Comments</h3>
